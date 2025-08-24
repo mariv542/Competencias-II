@@ -1,0 +1,27 @@
+@startuml
+!theme plain
+hide circle
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+
+entity "Usuarios" as Usuarios {
+    + rut : VARCHAR(12) <<PK>>
+    nombre : VARCHAR(50)
+    apellido : VARCHAR(50)
+    correo : VARCHAR(100) <<UNIQUE>>
+    contraseña : VARCHAR(255)
+    rol : ENUM('Administrador','Empleado')
+    estado : ENUM('Activo','Inactivo') [default: 'Activo']
+}
+
+entity "Asistencias" as Asistencias {
+    + id_asistencia : INT <<PK, AUTO_INCREMENT>>
+    rut_usuario : VARCHAR(12) <<FK>>
+    fecha : DATE
+    hora_entrada : TIME
+    hora_salida : TIME
+    estado : ENUM('Presente','Atraso','Salida anticipada','Inasistente') [default: 'Inasistente']
+}
+
+Usuarios ||--o{ Asistencias : "1:N"
+@enduml
