@@ -1,26 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-package app;
-
-import db.DataManager;
-import java.time.LocalDateTime;
-import model.Asistencia;
-import model.Usuario;
-
-/**
- *
- * @author cristobalO.O
- */
-public class Prueba {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-     try {
+try {
             // 1. Crear instancia de DataManager (esto ya crea la conexión y los DAO)
             DataManager dm = new DataManager();
 
@@ -41,7 +19,7 @@ public class Prueba {
         } catch (Exception e) {
             e.printStackTrace();
         }
-     /*
+     
      //para poder elimar el usuario 1  sin precarga 
      try {
             DataManager dm = new DataManager();
@@ -56,7 +34,7 @@ public class Prueba {
             e.printStackTrace();
         }
     
-*/
+
              try {
             DataManager dm = new DataManager();
 
@@ -77,9 +55,3 @@ public class Prueba {
         }
      
     }
-    
-    
-        
-}
-    
-
