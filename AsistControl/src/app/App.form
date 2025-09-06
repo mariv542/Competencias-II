@@ -41,7 +41,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btn_listaTrabajadores_Accesos" max="32767" attributes="0"/>
                           <Component id="btn_listaTrabajadores_salir" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jPanel21" alignment="1" max="32767" attributes="0"/>
+                          <Component id="Panel_de_Administrador1" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
@@ -56,7 +56,7 @@
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Component id="btn_listaTrabajadores_Accesos" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel21" min="-2" max="-2" attributes="0"/>
+                      <Component id="Panel_de_Administrador1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_listaTrabajadores_salir" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -120,7 +120,7 @@
                                       <EmptySpace type="unrelated" pref="92" max="32767" attributes="0"/>
                                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Btn_Crear" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
@@ -133,7 +133,7 @@
                               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txt_listaTrabajadores_buscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Btn_Crear" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -155,7 +155,7 @@
                         <Property name="text" type="java.lang.String" value="Buscar........................"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="Btn_Crear">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="b1" green="a5" red="9c" type="rgb"/>
@@ -166,7 +166,7 @@
                         <Property name="text" type="java.lang.String" value="Crear"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_CrearActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton2">
@@ -288,7 +288,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_listaTrabajadores_salirActionPerformed"/>
               </Events>
             </Component>
-            <Container class="javax.swing.JPanel" name="jPanel21">
+            <Container class="javax.swing.JPanel" name="Panel_de_Administrador1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="4d" green="47" red="44" type="rgb"/>
@@ -397,7 +397,7 @@
                                   <Component id="btn_lista_Trabajadores_salir" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jPanel17" max="32767" attributes="0"/>
+                          <Component id="Panel_de_Administrador2" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
@@ -411,7 +411,7 @@
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Component id="btn_lista_Trabajadores_Accesos1" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
+                      <Component id="Panel_de_Administrador2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_lista_Trabajadores_salir" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -467,7 +467,7 @@
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="304" max="32767" attributes="0"/>
                                       <Component id="btn_Guardar_Ingresar_Nuevo_Trabajador" min="-2" pref="181" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jPanel16" max="32767" attributes="0"/>
@@ -504,25 +504,27 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Text_ID_Ingresa_Nuevo_Trabajador" pref="443" max="32767" attributes="0"/>
-                                      <Component id="Text_Rut_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Text_Nombre_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Text_Apellido_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Text_Correo_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Text_Contraseña_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Text_Rol_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="box_Estado_Ingresa_Nuevo_Trabajador" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="box_Rol_Ingresa_Nuevo_Trabajador" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                          <Component id="Text_ID_Ingresa_Nuevo_Trabajador" pref="443" max="32767" attributes="0"/>
+                                          <Component id="Text_Rut_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="Text_Nombre_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="Text_Apellido_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="Text_Correo_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="Text_Contraseña_Ingresa_Nuevo_Trabajador" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="box_Estado_Ingresa_Nuevo_Trabajador" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace pref="23" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -556,8 +558,8 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="Text_Rol_Ingresa_Nuevo_Trabajador" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="box_Rol_Ingresa_Nuevo_Trabajador" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="box_Estado_Ingresa_Nuevo_Trabajador" min="-2" max="-2" attributes="0"/>
@@ -732,20 +734,6 @@
                             <Property name="text" type="java.lang.String" value="Rol"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="Text_Rol_Ingresa_Nuevo_Trabajador">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="c4" green="d0" red="d5" type="rgb"/>
-                            </Property>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Arial" size="13" style="0"/>
-                            </Property>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="0" green="0" red="0" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Rol"/>
-                          </Properties>
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jLabel11">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -768,6 +756,21 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_Estado_Ingresa_Nuevo_TrabajadorActionPerformed"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="box_Rol_Ingresa_Nuevo_Trabajador">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="4">
+                                <StringItem index="0" value="Item 1"/>
+                                <StringItem index="1" value="Item 2"/>
+                                <StringItem index="2" value="Item 3"/>
+                                <StringItem index="3" value="Item 4"/>
+                              </StringArray>
+                            </Property>
+                          </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
@@ -831,7 +834,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_lista_Trabajadores_salirActionPerformed"/>
               </Events>
             </Component>
-            <Container class="javax.swing.JPanel" name="jPanel17">
+            <Container class="javax.swing.JPanel" name="Panel_de_Administrador2">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="4d" green="47" red="44" type="rgb"/>
@@ -909,22 +912,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <EmptySpace min="0" pref="740" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel22" alignment="1" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="736" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="745" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel22" alignment="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -949,12 +945,12 @@
                           </Group>
                           <Component id="jLabel17" min="-2" pref="369" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel23" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="587" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="599" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -966,7 +962,7 @@
                       <Component id="jLabel17" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel24" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="95" max="32767" attributes="0"/>
+                      <EmptySpace pref="102" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -1027,7 +1023,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="text_login_clave1" alignment="0" min="-2" pref="405" max="-2" attributes="0"/>
+                                  <Component id="txt_Asistencia_Rut" alignment="0" min="-2" pref="405" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="31" max="32767" attributes="0"/>
                           </Group>
@@ -1046,7 +1042,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="text_login_clave1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txt_Asistencia_Rut" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btn_Login_ingresar1" min="-2" pref="48" max="-2" attributes="0"/>
                               <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -1077,7 +1073,7 @@
                         <Property name="text" type="java.lang.String" value="Rut"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="text_login_clave1">
+                    <Component class="javax.swing.JTextField" name="txt_Asistencia_Rut">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="c4" green="d0" red="d5" type="rgb"/>
@@ -1092,7 +1088,7 @@
                         <Property name="toolTipText" type="java.lang.String" value="text_login_clave"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_login_clave1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_Asistencia_RutActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_Login_ingresar1">
@@ -1235,7 +1231,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btn_listaTrabajadores_Accesos1" alignment="0" max="32767" attributes="0"/>
                               <Component id="btn_listaTrabajadores_salir1" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jPanel29" alignment="1" max="32767" attributes="0"/>
+                              <Component id="Panel_de_Administrador3" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -1247,8 +1243,8 @@
                           <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                           <Component id="btn_listaTrabajadores_Accesos1" min="-2" pref="54" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel29" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="354" max="32767" attributes="0"/>
+                          <Component id="Panel_de_Administrador3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="369" max="32767" attributes="0"/>
                           <Component id="btn_listaTrabajadores_salir1" min="-2" pref="54" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1287,7 +1283,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_listaTrabajadores_salir1ActionPerformed"/>
                   </Events>
                 </Component>
-                <Container class="javax.swing.JPanel" name="jPanel29">
+                <Container class="javax.swing.JPanel" name="Panel_de_Administrador3">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4d" green="47" red="44" type="rgb"/>
@@ -1484,19 +1480,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="743" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="763" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jPanel27" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel27" alignment="1" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="871" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="752" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel27" min="-2" max="-2" attributes="0"/>
@@ -1526,12 +1518,12 @@
                           </Group>
                           <Component id="jLabel24" min="-2" pref="369" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace pref="59" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel32" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="587" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="622" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -1542,8 +1534,8 @@
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jLabel24" min="-2" pref="54" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel28" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel28" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -1578,7 +1570,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jPanel30" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="37" max="32767" attributes="0"/>
+                          <EmptySpace pref="25" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1611,7 +1603,7 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="text_login_clave3" min="-2" pref="270" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jComboBox1" min="-2" pref="142" max="-2" attributes="0"/>
+                                                  <Component id="box_Estado_Asistencia" min="-2" pref="142" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1633,7 +1625,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_login_clave3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="box_Estado_Asistencia" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
@@ -1645,8 +1637,8 @@
                                   <Component id="btn_Login_ingresar5" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" pref="504" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" pref="351" max="-2" attributes="0"/>
+                              <EmptySpace pref="28" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1699,7 +1691,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Login_ingresar3ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="jComboBox1">
+                    <Component class="javax.swing.JComboBox" name="box_Estado_Asistencia">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
@@ -1711,7 +1703,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_Estado_AsistenciaActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -1770,7 +1762,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable1">
+                        <Component class="javax.swing.JTable" name="tm_asistenciaTabla">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="4" rowCount="4">
@@ -1803,7 +1795,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btn_listaTrabajadores_Accesos2" alignment="0" max="32767" attributes="0"/>
                               <Component id="btn_listaTrabajadores_salir2" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jPanel33" alignment="1" max="32767" attributes="0"/>
+                              <Component id="Panel_de_Administrador4" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -1815,8 +1807,8 @@
                           <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                           <Component id="btn_listaTrabajadores_Accesos2" min="-2" pref="54" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel33" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="354" max="32767" attributes="0"/>
+                          <Component id="Panel_de_Administrador4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="376" max="32767" attributes="0"/>
                           <Component id="btn_listaTrabajadores_salir2" min="-2" pref="54" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1855,7 +1847,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_listaTrabajadores_salir2ActionPerformed"/>
                   </Events>
                 </Component>
-                <Container class="javax.swing.JPanel" name="jPanel33">
+                <Container class="javax.swing.JPanel" name="Panel_de_Administrador4">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="4d" green="47" red="44" type="rgb"/>
@@ -2088,7 +2080,7 @@
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="text_login_clave" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txt_login_clave" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txt_login_usuario" alignment="0" pref="405" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -2111,7 +2103,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="text_login_clave" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_login_clave" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btn_Login_ingresar" min="-2" pref="48" max="-2" attributes="0"/>
                           <EmptySpace pref="49" max="32767" attributes="0"/>
@@ -2151,7 +2143,7 @@
                     <Property name="text" type="java.lang.String" value="Clave"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="text_login_clave">
+                <Component class="javax.swing.JTextField" name="txt_login_clave">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="c4" green="d0" red="d5" type="rgb"/>
@@ -2163,7 +2155,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="text_login_clave"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_login_claveActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_login_claveActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_Login_ingresar">

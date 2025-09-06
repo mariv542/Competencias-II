@@ -16,16 +16,26 @@ public class Asistencia {
     private LocalDateTime fechaHoraEntrada;
     private LocalDateTime fechaHoraSalida;
     private String estado;
+    private Usuario usuario;
 
     public Asistencia() {
     }
-
+    
     public Asistencia(int idAsistencia, int idUsuario, LocalDateTime fechaHoraEntrada, LocalDateTime fechaHoraSalida, String estado) {
         this.idAsistencia = idAsistencia;
         this.idUsuario = idUsuario;
         this.fechaHoraEntrada = fechaHoraEntrada;
         this.fechaHoraSalida = fechaHoraSalida;
         this.estado = estado;
+    }
+
+    public Asistencia(int idAsistencia, int idUsuario, LocalDateTime fechaHoraEntrada, LocalDateTime fechaHoraSalida, String estado, Usuario usuario) {
+        this.idAsistencia = idAsistencia;
+        this.idUsuario = idUsuario;
+        this.fechaHoraEntrada = fechaHoraEntrada;
+        this.fechaHoraSalida = fechaHoraSalida;
+        this.estado = estado;
+        this.usuario = usuario;
     }
 
     public int getIdAsistencia() {
@@ -67,7 +77,14 @@ public class Asistencia {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     
 }

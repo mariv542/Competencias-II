@@ -104,6 +104,39 @@ public class DaoUsuario {
         return lista;
     }
      
+    public boolean validar(String nombre, String contraseña) throws SQLException {
+        String sql = "SELECT *\n"
+                + "FROM Usuarios\n"
+                + "WHERE nombre LIKE '" + nombre + "' AND contraseña LIKE '" + contraseña + "'";
+        ResultSet rs = conexion.ejecutar(sql);
+        if (rs.next()) {
+            return true;
+        }
+        conexion.close();
+        return false;
+
+    }
+    
+    public Usuario getOne(String nombre, String clave) throws SQLException {
+        String sql = "SELECT * FROM Usuarios WHERE nombre = '" + nombre + "' AND contraseña = '" + clave + "'";
+        ResultSet rs = conexion.ejecutar(sql);
+        if (rs.next()) {
+            return new Usuario(
+                    rs.getInt("id_usuario"),
+                    rs.getString("rut"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido"),
+                    rs.getString("correo"),
+                    rs.getString("contraseña"),
+                    rs.getString("rol"),
+                    rs.getString("estado")
+            );
+        }
+        conexion.close();
+        return null;
+
+    }
+     
     public Usuario getOne(int id) throws SQLException {
         String sql = "SELECT * FROM Usuarios WHERE id_usuario = " + id;
         ResultSet rs = conexion.ejecutar(sql);
@@ -134,5 +167,24 @@ public class DaoUsuario {
         return nuevaId + 1;
     }
     
+    
+     public Usuario getRut(String rut) throws SQLException {
+        String sql = "SELECT * FROM Usuarios WHERE rut = '" + rut + "'";
+        ResultSet rs = conexion.ejecutar(sql);
+
+        if (rs.next()) {
+            return new Usuario(
+                rs.getInt("id_usuario"),
+                rs.getString("rut"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getString("correo"),
+                rs.getString("contraseña"),
+                rs.getString("rol"),
+                rs.getString("estado")
+            );
+        }
+        return null;
+    }
     
 }

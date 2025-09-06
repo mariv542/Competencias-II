@@ -6,10 +6,13 @@ package app;
 
 import db.DataManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Asistencia;
 import model.Usuario;
+import modelTM.TMAsistencia;
 import modelTM.TMUsuario;
 
 /**
@@ -17,23 +20,20 @@ import modelTM.TMUsuario;
  * @author cristobalO.O
  */
 public class App extends javax.swing.JFrame {
-
-    /**
-     * Creates new form App
-     */
+    public static Usuario SESSION = null;   
     
     private DataManager dataManager;
     
     public App() {
+        this.dataManager = new DataManager();
         initComponents();
         setConfig();
         setConfigSize();
-        
-        box_Estado_Ingresa_Nuevo_Trabajador.removeAllItems();
-        box_Estado_Ingresa_Nuevo_Trabajador.addItem("Activo");
-        box_Estado_Ingresa_Nuevo_Trabajador.addItem("Inactivo");
-        
-        this.dataManager = new DataManager();
+        setPackConfig();
+        //box para trabajadores
+        comboBoxTrabajadores();
+        //box para Asistencias
+        comboBoxAsistencia();
         
 
         
@@ -53,7 +53,7 @@ public class App extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         txt_listaTrabajadores_buscar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Btn_Crear = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -61,7 +61,7 @@ public class App extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         btn_listaTrabajadores_Accesos = new javax.swing.JButton();
         btn_listaTrabajadores_salir = new javax.swing.JButton();
-        jPanel21 = new javax.swing.JPanel();
+        Panel_de_Administrador1 = new javax.swing.JPanel();
         btn_lista_Trabajadores_usuarios5 = new javax.swing.JButton();
         btn_listaTrabajadores_reportes5 = new javax.swing.JButton();
         IngresarNuevoTrabajador = new javax.swing.JFrame();
@@ -82,14 +82,14 @@ public class App extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         Text_Contraseña_Ingresa_Nuevo_Trabajador = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        Text_Rol_Ingresa_Nuevo_Trabajador = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         box_Estado_Ingresa_Nuevo_Trabajador = new javax.swing.JComboBox<>();
+        box_Rol_Ingresa_Nuevo_Trabajador = new javax.swing.JComboBox<>();
         btn_Guardar_Ingresar_Nuevo_Trabajador = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         btn_lista_Trabajadores_Accesos1 = new javax.swing.JButton();
         btn_lista_Trabajadores_salir = new javax.swing.JButton();
-        jPanel17 = new javax.swing.JPanel();
+        Panel_de_Administrador2 = new javax.swing.JPanel();
         btn_lista_Trabajadores_usuarios1 = new javax.swing.JButton();
         btn_listaTrabajadores_reportes1 = new javax.swing.JButton();
         RegistroAcceso = new javax.swing.JFrame();
@@ -98,7 +98,7 @@ public class App extends javax.swing.JFrame {
         jPanel25 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        text_login_clave1 = new javax.swing.JTextField();
+        txt_Asistencia_Rut = new javax.swing.JTextField();
         btn_Login_ingresar1 = new javax.swing.JButton();
         jPanel26 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -108,7 +108,7 @@ public class App extends javax.swing.JFrame {
         jPanel23 = new javax.swing.JPanel();
         btn_listaTrabajadores_Accesos1 = new javax.swing.JButton();
         btn_listaTrabajadores_salir1 = new javax.swing.JButton();
-        jPanel29 = new javax.swing.JPanel();
+        Panel_de_Administrador3 = new javax.swing.JPanel();
         btn_lista_Trabajadores_usuarios6 = new javax.swing.JButton();
         btn_listaTrabajadores_reportes6 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
@@ -124,16 +124,16 @@ public class App extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         text_login_clave3 = new javax.swing.JTextField();
         btn_Login_ingresar3 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        box_Estado_Asistencia = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
         text_login_clave5 = new javax.swing.JTextField();
         btn_Login_ingresar5 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tm_asistenciaTabla = new javax.swing.JTable();
         jPanel32 = new javax.swing.JPanel();
         btn_listaTrabajadores_Accesos2 = new javax.swing.JButton();
         btn_listaTrabajadores_salir2 = new javax.swing.JButton();
-        jPanel33 = new javax.swing.JPanel();
+        Panel_de_Administrador4 = new javax.swing.JPanel();
         btn_lista_Trabajadores_usuarios7 = new javax.swing.JButton();
         btn_listaTrabajadores_reportes7 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
@@ -147,7 +147,7 @@ public class App extends javax.swing.JFrame {
         txt_login_usuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        text_login_clave = new javax.swing.JTextField();
+        txt_login_clave = new javax.swing.JTextField();
         btn_Login_ingresar = new javax.swing.JButton();
 
         jPanel9.setBackground(new java.awt.Color(68, 71, 77));
@@ -160,12 +160,12 @@ public class App extends javax.swing.JFrame {
         txt_listaTrabajadores_buscar.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         txt_listaTrabajadores_buscar.setText("Buscar........................");
 
-        jButton1.setBackground(new java.awt.Color(156, 165, 177));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setText("Crear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Crear.setBackground(new java.awt.Color(156, 165, 177));
+        Btn_Crear.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Btn_Crear.setText("Crear");
+        Btn_Crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Btn_CrearActionPerformed(evt);
             }
         });
 
@@ -226,7 +226,7 @@ public class App extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 92, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(Btn_Crear)))
                 .addGap(17, 17, 17))
         );
         jPanel11Layout.setVerticalGroup(
@@ -235,7 +235,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_listaTrabajadores_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(Btn_Crear)
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +288,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jPanel21.setBackground(new java.awt.Color(68, 71, 77));
+        Panel_de_Administrador1.setBackground(new java.awt.Color(68, 71, 77));
 
         btn_lista_Trabajadores_usuarios5.setBackground(new java.awt.Color(156, 165, 177));
         btn_lista_Trabajadores_usuarios5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -310,16 +310,16 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Panel_de_Administrador1Layout = new javax.swing.GroupLayout(Panel_de_Administrador1);
+        Panel_de_Administrador1.setLayout(Panel_de_Administrador1Layout);
+        Panel_de_Administrador1Layout.setHorizontalGroup(
+            Panel_de_Administrador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_lista_Trabajadores_usuarios5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_listaTrabajadores_reportes5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
         );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
+        Panel_de_Administrador1Layout.setVerticalGroup(
+            Panel_de_Administrador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_de_Administrador1Layout.createSequentialGroup()
                 .addComponent(btn_lista_Trabajadores_usuarios5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_listaTrabajadores_reportes5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -335,7 +335,7 @@ public class App extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_listaTrabajadores_Accesos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_listaTrabajadores_salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Panel_de_Administrador1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -347,7 +347,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addComponent(btn_listaTrabajadores_Accesos, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Panel_de_Administrador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_listaTrabajadores_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -443,11 +443,6 @@ public class App extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Rol");
 
-        Text_Rol_Ingresa_Nuevo_Trabajador.setBackground(new java.awt.Color(213, 208, 196));
-        Text_Rol_Ingresa_Nuevo_Trabajador.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        Text_Rol_Ingresa_Nuevo_Trabajador.setForeground(new java.awt.Color(0, 0, 0));
-        Text_Rol_Ingresa_Nuevo_Trabajador.setText("Rol");
-
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Estado");
 
@@ -458,30 +453,33 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        box_Rol_Ingresa_Nuevo_Trabajador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(Text_ID_Ingresa_Nuevo_Trabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
-                    .addComponent(Text_Rut_Ingresa_Nuevo_Trabajador)
-                    .addComponent(Text_Nombre_Ingresa_Nuevo_Trabajador)
-                    .addComponent(Text_Apellido_Ingresa_Nuevo_Trabajador)
-                    .addComponent(Text_Correo_Ingresa_Nuevo_Trabajador)
-                    .addComponent(Text_Contraseña_Ingresa_Nuevo_Trabajador)
-                    .addComponent(Text_Rol_Ingresa_Nuevo_Trabajador)
-                    .addComponent(box_Estado_Ingresa_Nuevo_Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(box_Rol_Ingresa_Nuevo_Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel4)
+                        .addComponent(Text_ID_Ingresa_Nuevo_Trabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                        .addComponent(Text_Rut_Ingresa_Nuevo_Trabajador)
+                        .addComponent(Text_Nombre_Ingresa_Nuevo_Trabajador)
+                        .addComponent(Text_Apellido_Ingresa_Nuevo_Trabajador)
+                        .addComponent(Text_Correo_Ingresa_Nuevo_Trabajador)
+                        .addComponent(Text_Contraseña_Ingresa_Nuevo_Trabajador)
+                        .addComponent(box_Estado_Ingresa_Nuevo_Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +511,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Text_Rol_Ingresa_Nuevo_Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(box_Rol_Ingresa_Nuevo_Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -537,7 +535,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 304, Short.MAX_VALUE)
                         .addComponent(btn_Guardar_Ingresar_Nuevo_Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
@@ -596,7 +594,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jPanel17.setBackground(new java.awt.Color(68, 71, 77));
+        Panel_de_Administrador2.setBackground(new java.awt.Color(68, 71, 77));
 
         btn_lista_Trabajadores_usuarios1.setBackground(new java.awt.Color(156, 165, 177));
         btn_lista_Trabajadores_usuarios1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -618,19 +616,19 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
+        javax.swing.GroupLayout Panel_de_Administrador2Layout = new javax.swing.GroupLayout(Panel_de_Administrador2);
+        Panel_de_Administrador2.setLayout(Panel_de_Administrador2Layout);
+        Panel_de_Administrador2Layout.setHorizontalGroup(
+            Panel_de_Administrador2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_de_Administrador2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_de_Administrador2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_lista_Trabajadores_usuarios1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_listaTrabajadores_reportes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
+        Panel_de_Administrador2Layout.setVerticalGroup(
+            Panel_de_Administrador2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_de_Administrador2Layout.createSequentialGroup()
                 .addComponent(btn_lista_Trabajadores_usuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_listaTrabajadores_reportes1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -648,7 +646,7 @@ public class App extends javax.swing.JFrame {
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_lista_Trabajadores_Accesos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_lista_Trabajadores_salir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Panel_de_Administrador2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -659,7 +657,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addComponent(btn_lista_Trabajadores_Accesos1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Panel_de_Administrador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_lista_Trabajadores_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -696,14 +694,14 @@ public class App extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Rut");
 
-        text_login_clave1.setBackground(new java.awt.Color(213, 208, 196));
-        text_login_clave1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        text_login_clave1.setForeground(new java.awt.Color(0, 0, 0));
-        text_login_clave1.setText("Ingrese su rut");
-        text_login_clave1.setToolTipText("text_login_clave");
-        text_login_clave1.addActionListener(new java.awt.event.ActionListener() {
+        txt_Asistencia_Rut.setBackground(new java.awt.Color(213, 208, 196));
+        txt_Asistencia_Rut.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        txt_Asistencia_Rut.setForeground(new java.awt.Color(0, 0, 0));
+        txt_Asistencia_Rut.setText("Ingrese su rut");
+        txt_Asistencia_Rut.setToolTipText("text_login_clave");
+        txt_Asistencia_Rut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text_login_clave1ActionPerformed(evt);
+                txt_Asistencia_RutActionPerformed(evt);
             }
         });
 
@@ -727,7 +725,7 @@ public class App extends javax.swing.JFrame {
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
-                    .addComponent(text_login_clave1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Asistencia_Rut, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -742,7 +740,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(text_login_clave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_Asistencia_Rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Login_ingresar1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -852,7 +850,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jPanel29.setBackground(new java.awt.Color(68, 71, 77));
+        Panel_de_Administrador3.setBackground(new java.awt.Color(68, 71, 77));
 
         btn_lista_Trabajadores_usuarios6.setBackground(new java.awt.Color(156, 165, 177));
         btn_lista_Trabajadores_usuarios6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -874,16 +872,16 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
-        jPanel29.setLayout(jPanel29Layout);
-        jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Panel_de_Administrador3Layout = new javax.swing.GroupLayout(Panel_de_Administrador3);
+        Panel_de_Administrador3.setLayout(Panel_de_Administrador3Layout);
+        Panel_de_Administrador3Layout.setHorizontalGroup(
+            Panel_de_Administrador3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_lista_Trabajadores_usuarios6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_listaTrabajadores_reportes6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         );
-        jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
+        Panel_de_Administrador3Layout.setVerticalGroup(
+            Panel_de_Administrador3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_de_Administrador3Layout.createSequentialGroup()
                 .addComponent(btn_lista_Trabajadores_usuarios6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_listaTrabajadores_reportes6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -899,7 +897,7 @@ public class App extends javax.swing.JFrame {
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_listaTrabajadores_Accesos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_listaTrabajadores_salir1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Panel_de_Administrador3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel23Layout.setVerticalGroup(
@@ -908,8 +906,8 @@ public class App extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addComponent(btn_listaTrabajadores_Accesos1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 354, Short.MAX_VALUE)
+                .addComponent(Panel_de_Administrador3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 369, Short.MAX_VALUE)
                 .addComponent(btn_listaTrabajadores_salir1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -929,11 +927,11 @@ public class App extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel22Layout.createSequentialGroup()
                     .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 587, Short.MAX_VALUE)))
+                    .addGap(0, 599, Short.MAX_VALUE)))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -942,7 +940,7 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
             .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel22Layout.createSequentialGroup()
                     .addContainerGap()
@@ -956,18 +954,13 @@ public class App extends javax.swing.JFrame {
             RegistroAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 740, Short.MAX_VALUE)
             .addGroup(RegistroAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegistroAccesoLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         RegistroAccesoLayout.setVerticalGroup(
             RegistroAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
+            .addGap(0, 745, Short.MAX_VALUE)
             .addGroup(RegistroAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(RegistroAccesoLayout.createSequentialGroup()
-                    .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 6, Short.MAX_VALUE)))
+                .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(68, 71, 77));
@@ -1078,10 +1071,10 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        box_Estado_Asistencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        box_Estado_Asistencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                box_Estado_AsistenciaActionPerformed(evt);
             }
         });
 
@@ -1110,7 +1103,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tm_asistenciaTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1121,7 +1114,7 @@ public class App extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tm_asistenciaTabla);
 
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
@@ -1143,7 +1136,7 @@ public class App extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel30Layout.createSequentialGroup()
                                     .addComponent(text_login_clave3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(box_Estado_Asistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel30Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1157,7 +1150,7 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text_login_clave3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(box_Estado_Asistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1167,8 +1160,8 @@ public class App extends javax.swing.JFrame {
                     .addComponent(btn_Login_ingresar3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Login_ingresar5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
@@ -1185,7 +1178,7 @@ public class App extends javax.swing.JFrame {
             .addGroup(jPanel28Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel32.setBackground(new java.awt.Color(68, 71, 77));
@@ -1209,7 +1202,7 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        jPanel33.setBackground(new java.awt.Color(68, 71, 77));
+        Panel_de_Administrador4.setBackground(new java.awt.Color(68, 71, 77));
 
         btn_lista_Trabajadores_usuarios7.setBackground(new java.awt.Color(156, 165, 177));
         btn_lista_Trabajadores_usuarios7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -1231,16 +1224,16 @@ public class App extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
-        jPanel33.setLayout(jPanel33Layout);
-        jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Panel_de_Administrador4Layout = new javax.swing.GroupLayout(Panel_de_Administrador4);
+        Panel_de_Administrador4.setLayout(Panel_de_Administrador4Layout);
+        Panel_de_Administrador4Layout.setHorizontalGroup(
+            Panel_de_Administrador4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_lista_Trabajadores_usuarios7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_listaTrabajadores_reportes7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
         );
-        jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel33Layout.createSequentialGroup()
+        Panel_de_Administrador4Layout.setVerticalGroup(
+            Panel_de_Administrador4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_de_Administrador4Layout.createSequentialGroup()
                 .addComponent(btn_lista_Trabajadores_usuarios7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_listaTrabajadores_reportes7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1256,7 +1249,7 @@ public class App extends javax.swing.JFrame {
                 .addGroup(jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_listaTrabajadores_Accesos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_listaTrabajadores_salir2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel33, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Panel_de_Administrador4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel32Layout.setVerticalGroup(
@@ -1265,8 +1258,8 @@ public class App extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addComponent(btn_listaTrabajadores_Accesos2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 354, Short.MAX_VALUE)
+                .addComponent(Panel_de_Administrador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 376, Short.MAX_VALUE)
                 .addComponent(btn_listaTrabajadores_salir2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1286,11 +1279,11 @@ public class App extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel27Layout.createSequentialGroup()
                     .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 587, Short.MAX_VALUE)))
+                    .addGap(0, 622, Short.MAX_VALUE)))
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1298,8 +1291,8 @@ public class App extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel27Layout.createSequentialGroup()
                     .addContainerGap()
@@ -1311,16 +1304,13 @@ public class App extends javax.swing.JFrame {
         Reportes.getContentPane().setLayout(ReportesLayout);
         ReportesLayout.setHorizontalGroup(
             ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 743, Short.MAX_VALUE)
+            .addGap(0, 763, Short.MAX_VALUE)
             .addGroup(ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ReportesLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ReportesLayout.setVerticalGroup(
             ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 871, Short.MAX_VALUE)
+            .addGap(0, 752, Short.MAX_VALUE)
             .addGroup(ReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(ReportesLayout.createSequentialGroup()
                     .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1370,13 +1360,13 @@ public class App extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("Clave");
 
-        text_login_clave.setBackground(new java.awt.Color(213, 208, 196));
-        text_login_clave.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        text_login_clave.setText("ingrese su clave");
-        text_login_clave.setToolTipText("text_login_clave");
-        text_login_clave.addActionListener(new java.awt.event.ActionListener() {
+        txt_login_clave.setBackground(new java.awt.Color(213, 208, 196));
+        txt_login_clave.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        txt_login_clave.setText("ingrese su clave");
+        txt_login_clave.setToolTipText("text_login_clave");
+        txt_login_clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text_login_claveActionPerformed(evt);
+                txt_login_claveActionPerformed(evt);
             }
         });
 
@@ -1401,7 +1391,7 @@ public class App extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(text_login_clave)
+                            .addComponent(txt_login_clave)
                             .addComponent(txt_login_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(153, 153, 153)
@@ -1418,7 +1408,7 @@ public class App extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(text_login_clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_login_clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_Login_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(49, Short.MAX_VALUE))
@@ -1476,15 +1466,40 @@ public class App extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_login_usuarioActionPerformed
 
-    private void text_login_claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_login_claveActionPerformed
+    private void txt_login_claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_login_claveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text_login_claveActionPerformed
+    }//GEN-LAST:event_txt_login_claveActionPerformed
 
     private void btn_Login_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Login_ingresarActionPerformed
+        
         try {
-            // TODO add your handling code here:
-            ListaTrabajadores.setVisible(true);
-            actualizacionUsuario();
+            String nombre = txt_login_usuario.getText();
+            String clave = txt_login_clave.getText();
+
+            if (dataManager.getDataUsuario().validar(nombre, clave)) {
+                JOptionPane.showMessageDialog(this, "Credenciales válidas, Bienvenido!!");
+                App.SESSION = dataManager.getDataUsuario().getOne(nombre, clave);
+
+                // Abrir la ventana ListaTrabajadores admintradores
+                
+                if (!SESSION.getRol().equals("Administrador")) {
+                    RegistroAcceso.setVisible(true);
+                }else{
+                    ListaTrabajadores.setVisible(true);
+                }
+                actualizacionUsuario();
+
+                // Ocultar botón si el rol NO es admin
+                if (!SESSION.getRol().equals("Administrador")) {
+                    Panel_de_Administrador1.setVisible(false);
+                    Panel_de_Administrador2.setVisible(false);
+                    Panel_de_Administrador3.setVisible(false);
+                    Panel_de_Administrador4.setVisible(false);
+                    
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Credenciales inválidas, inténtelo nuevamente.");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1517,7 +1532,7 @@ public class App extends javax.swing.JFrame {
         ListaTrabajadores.setVisible(true);
     }//GEN-LAST:event_btn_lista_Trabajadores_salirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Btn_CrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_CrearActionPerformed
         try {
             // TODO add your handling code here:
             
@@ -1528,7 +1543,7 @@ public class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Btn_CrearActionPerformed
 
     private void btn_Guardar_Ingresar_Nuevo_TrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Guardar_Ingresar_Nuevo_TrabajadorActionPerformed
         // TODO add your handling code here:
@@ -1579,7 +1594,7 @@ public class App extends javax.swing.JFrame {
                 Text_Apellido_Ingresa_Nuevo_Trabajador.setText(u.getApellido());
                 Text_Correo_Ingresa_Nuevo_Trabajador.setText(u.getCorreo());
                 Text_Contraseña_Ingresa_Nuevo_Trabajador.setText(u.getContraseña());
-                Text_Rol_Ingresa_Nuevo_Trabajador.setText(u.getRol());
+                box_Rol_Ingresa_Nuevo_Trabajador.setSelectedItem(u.getRol());
                 box_Estado_Ingresa_Nuevo_Trabajador.setSelectedItem(u.getEstado());
 
                 
@@ -1599,15 +1614,41 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_lista_Trabajadores_usuarios5ActionPerformed
 
     private void btn_listaTrabajadores_reportes5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_reportes5ActionPerformed
-        // TODO add your handling code here:
+        Reportes.setVisible(true);
+        try {
+            actualizacionAsistencia();
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_listaTrabajadores_reportes5ActionPerformed
 
-    private void text_login_clave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_login_clave1ActionPerformed
+    private void txt_Asistencia_RutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_Asistencia_RutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text_login_clave1ActionPerformed
+    }//GEN-LAST:event_txt_Asistencia_RutActionPerformed
 
     private void btn_Login_ingresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Login_ingresar1ActionPerformed
-        // TODO add your handling code here:
+        String rut = txt_Asistencia_Rut.getText().trim();
+
+        if (rut.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un RUT válido.");
+            return;
+        }
+
+        try {
+            Usuario u = dataManager.getDataUsuario().getRut(rut);
+
+            if (u == null) {
+                JOptionPane.showMessageDialog(this, "⚠️ Usuario no encontrado.");
+                return;
+            }
+
+            dataManager.getDataAsistencia().marcarEntrada(u.getIdUsuario());
+            JOptionPane.showMessageDialog(this, "✅ Entrada registrada para " + u.getNombre());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
     }//GEN-LAST:event_btn_Login_ingresar1ActionPerformed
 
     private void btn_listaTrabajadores_Accesos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_Accesos1ActionPerformed
@@ -1631,16 +1672,33 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_text_login_clave2ActionPerformed
 
     private void btn_Login_ingresar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Login_ingresar2ActionPerformed
-        // TODO add your handling code here:
+        String rut = txt_Asistencia_Rut.getText().trim();
+
+        if (rut.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un RUT válido.");
+            return;
+        }
+
+        try {
+            Usuario u = dataManager.getDataUsuario().getRut(rut);
+
+            if (u == null) {
+                JOptionPane.showMessageDialog(this, "⚠️ Usuario no encontrado.");
+                return;
+            }
+
+            dataManager.getDataAsistencia().marcarSalida(u.getIdUsuario());
+            JOptionPane.showMessageDialog(this, "✅ Salida registrada para " + u.getNombre());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
     }//GEN-LAST:event_btn_Login_ingresar2ActionPerformed
 
     private void text_login_clave3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_login_clave3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_login_clave3ActionPerformed
-
-    private void btn_Login_ingresar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Login_ingresar3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_Login_ingresar3ActionPerformed
 
     private void btn_listaTrabajadores_Accesos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_Accesos2ActionPerformed
         // TODO add your handling code here:
@@ -1658,9 +1716,23 @@ public class App extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_listaTrabajadores_reportes7ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void box_Estado_AsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_Estado_AsistenciaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        
+        Object selected = box_Estado_Asistencia.getSelectedItem();
+           if (selected == null) {
+               return;
+           }
+
+           String estadoSeleccionado = selected.toString();
+
+           try {
+               actualizacionAsistencia(estadoSeleccionado);
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+               JOptionPane.showMessageDialog(this, "Error al filtrar asistencias");
+           }
+    }//GEN-LAST:event_box_Estado_AsistenciaActionPerformed
 
     private void text_login_clave5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_login_clave5ActionPerformed
         // TODO add your handling code here:
@@ -1669,6 +1741,10 @@ public class App extends javax.swing.JFrame {
     private void btn_Login_ingresar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Login_ingresar5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_Login_ingresar5ActionPerformed
+
+    private void btn_Login_ingresar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Login_ingresar3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Login_ingresar3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1706,8 +1782,13 @@ public class App extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Crear;
     private javax.swing.JFrame IngresarNuevoTrabajador;
     private javax.swing.JFrame ListaTrabajadores;
+    private javax.swing.JPanel Panel_de_Administrador1;
+    private javax.swing.JPanel Panel_de_Administrador2;
+    private javax.swing.JPanel Panel_de_Administrador3;
+    private javax.swing.JPanel Panel_de_Administrador4;
     private javax.swing.JFrame RegistroAcceso;
     private javax.swing.JFrame Reportes;
     private javax.swing.JTextField Text_Apellido_Ingresa_Nuevo_Trabajador;
@@ -1715,9 +1796,10 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextField Text_Correo_Ingresa_Nuevo_Trabajador;
     private javax.swing.JTextField Text_ID_Ingresa_Nuevo_Trabajador;
     private javax.swing.JTextField Text_Nombre_Ingresa_Nuevo_Trabajador;
-    private javax.swing.JTextField Text_Rol_Ingresa_Nuevo_Trabajador;
     private javax.swing.JTextField Text_Rut_Ingresa_Nuevo_Trabajador;
+    private javax.swing.JComboBox<String> box_Estado_Asistencia;
     private javax.swing.JComboBox<String> box_Estado_Ingresa_Nuevo_Trabajador;
+    private javax.swing.JComboBox<String> box_Rol_Ingresa_Nuevo_Trabajador;
     private javax.swing.JButton btn_Guardar_Ingresar_Nuevo_Trabajador;
     private javax.swing.JButton btn_Login_ingresar;
     private javax.swing.JButton btn_Login_ingresar1;
@@ -1728,9 +1810,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btn_listaTrabajadores_Accesos1;
     private javax.swing.JButton btn_listaTrabajadores_Accesos2;
     private javax.swing.JButton btn_listaTrabajadores_reportes1;
-    private javax.swing.JButton btn_listaTrabajadores_reportes2;
-    private javax.swing.JButton btn_listaTrabajadores_reportes3;
-    private javax.swing.JButton btn_listaTrabajadores_reportes4;
     private javax.swing.JButton btn_listaTrabajadores_reportes5;
     private javax.swing.JButton btn_listaTrabajadores_reportes6;
     private javax.swing.JButton btn_listaTrabajadores_reportes7;
@@ -1740,16 +1819,11 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton btn_lista_Trabajadores_Accesos1;
     private javax.swing.JButton btn_lista_Trabajadores_salir;
     private javax.swing.JButton btn_lista_Trabajadores_usuarios1;
-    private javax.swing.JButton btn_lista_Trabajadores_usuarios2;
-    private javax.swing.JButton btn_lista_Trabajadores_usuarios3;
-    private javax.swing.JButton btn_lista_Trabajadores_usuarios4;
     private javax.swing.JButton btn_lista_Trabajadores_usuarios5;
     private javax.swing.JButton btn_lista_Trabajadores_usuarios6;
     private javax.swing.JButton btn_lista_Trabajadores_usuarios7;
     private javax.swing.JFrame colores;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1780,12 +1854,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
@@ -1793,11 +1862,9 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
-    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel32;
-    private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -1807,14 +1874,14 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField text_login_clave;
-    private javax.swing.JTextField text_login_clave1;
     private javax.swing.JTextField text_login_clave2;
     private javax.swing.JTextField text_login_clave3;
     private javax.swing.JTextField text_login_clave5;
+    private javax.swing.JTable tm_asistenciaTabla;
     private javax.swing.JTable tm_lista_Trabajadores;
+    private javax.swing.JTextField txt_Asistencia_Rut;
     private javax.swing.JTextField txt_listaTrabajadores_buscar;
+    private javax.swing.JTextField txt_login_clave;
     private javax.swing.JTextField txt_login_usuario;
     // End of variables declaration//GEN-END:variables
     
@@ -1823,25 +1890,56 @@ public class App extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    private void setConfigSize() {
+    private void setPackConfig() {
         ListaTrabajadores.pack();  
         ListaTrabajadores.setLocationRelativeTo(null);
 
         IngresarNuevoTrabajador.pack();
         IngresarNuevoTrabajador.setLocationRelativeTo(null);
         
+        RegistroAcceso.pack();
+        RegistroAcceso.setLocationRelativeTo(null);
+        
+        Reportes.pack();
+        Reportes.setLocationRelativeTo(null);
+    }
+    
+    private void setConfigSize() {        
         int ancho = 800;
         int alto = 820;
 
         ListaTrabajadores.setSize(ancho, alto);
         IngresarNuevoTrabajador.setSize(ancho, alto);
+        RegistroAcceso.setSize(ancho, alto);
+        Reportes.setSize(ancho, 800);
     }
         
     private void actualizacionUsuario() throws SQLException {
-        java.util.List<Usuario> tmuser = dataManager.getDataUsuario().getAll();
+        List<Usuario> tmuser = dataManager.getDataUsuario().getAll();
         TMUsuario tmUser = new TMUsuario(tmuser);
         tm_lista_Trabajadores.setModel(tmUser);
     }
+    
+    private void actualizacionAsistencia(String estado) throws SQLException {
+        List<Asistencia> tmasi;
+
+        if (estado.equalsIgnoreCase("Todos")) {
+            tmasi = dataManager.getDataAsistencia().getAllAsistencia(); // traemos todo
+        } else {
+            tmasi = dataManager.getDataAsistencia().getByEstado(estado); // filtramos
+        }
+
+        TMAsistencia tmAsis = new TMAsistencia(tmasi);
+        tm_asistenciaTabla.setModel(tmAsis);
+    }
+    
+    private void actualizacionAsistencia() throws SQLException {
+        List<Asistencia> tmasi = dataManager.getDataAsistencia().getAllAsistencia();
+        TMAsistencia tmAsis = new TMAsistencia(tmasi);
+        tm_asistenciaTabla.setModel(tmAsis);
+    }
+    
+    
     private void resetFormPersonal() {
            //app_modicarUsuario_txt_id.setText(String.valueOf(calcularId()));
            Text_ID_Ingresa_Nuevo_Trabajador.setText("");
@@ -1850,7 +1948,6 @@ public class App extends javax.swing.JFrame {
            Text_Apellido_Ingresa_Nuevo_Trabajador.setText("");
            Text_Correo_Ingresa_Nuevo_Trabajador.setText("");
            Text_Contraseña_Ingresa_Nuevo_Trabajador.setText("");
-           Text_Rol_Ingresa_Nuevo_Trabajador.setText("");
        }
     
     private Usuario getDataFormUsuario() {
@@ -1862,8 +1959,10 @@ public class App extends javax.swing.JFrame {
                 String apellido = validarCampoVacioPersonal(Text_Apellido_Ingresa_Nuevo_Trabajador.getText(), "Apellido");
                 String correo = validarCampoVacioPersonal(Text_Correo_Ingresa_Nuevo_Trabajador.getText(), "Correo");
                 String contraseña = validarCampoVacioPersonal(Text_Contraseña_Ingresa_Nuevo_Trabajador.getText(), "Contraseña");
-                String rol = validarCampoVacioPersonal(Text_Rol_Ingresa_Nuevo_Trabajador.getText(), "Rol");
+                String rol = box_Rol_Ingresa_Nuevo_Trabajador.getSelectedItem().toString();
                 String estado = box_Estado_Ingresa_Nuevo_Trabajador.getSelectedItem().toString();
+                
+                //cambio de  rol a  box para poder tenerlo mejor 
                 
 
                 if (rut == null || nombre == null || apellido == null || correo == null || 
@@ -1902,6 +2001,25 @@ public class App extends javax.swing.JFrame {
         }
         return texto.trim();
 
+    }
+        
+    private void comboBoxAsistencia(){
+        box_Estado_Asistencia.removeAllItems();
+        box_Estado_Asistencia.addItem("Todos");
+        box_Estado_Asistencia.addItem("Presente");
+        box_Estado_Asistencia.addItem("Atraso");
+        box_Estado_Asistencia.addItem("Salida anticipada");
+        box_Estado_Asistencia.addItem("Inasistente");
+        }
+    private void comboBoxTrabajadores(){
+        //box para trabajadores
+        box_Estado_Ingresa_Nuevo_Trabajador.removeAllItems();
+        box_Estado_Ingresa_Nuevo_Trabajador.addItem("Activo");
+        box_Estado_Ingresa_Nuevo_Trabajador.addItem("Inactivo");
+        //box para trabajadores 
+        box_Rol_Ingresa_Nuevo_Trabajador.removeAllItems();
+        box_Rol_Ingresa_Nuevo_Trabajador.addItem("Administrador");
+        box_Rol_Ingresa_Nuevo_Trabajador.addItem("Empleado");
     }
 
 }

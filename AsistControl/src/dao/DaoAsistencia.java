@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Asistencia;
+import model.Usuario;
 
 /**
  *
@@ -74,28 +75,28 @@ public class DaoAsistencia {
         conexion.ejecutar(sql);
     }
     
-public List<Asistencia> getAll() throws SQLException {
-    String sql = "SELECT * FROM Asistencias";
-    ResultSet rs = conexion.ejecutar(sql);
+    public List<Asistencia> getAll() throws SQLException {
+        String sql = "SELECT * FROM Asistencias";
+        ResultSet rs = conexion.ejecutar(sql);
 
-    List<Asistencia> lista = new ArrayList<>();
-    while (rs.next()) {
-        Asistencia a = new Asistencia();
-        a.setIdAsistencia(rs.getInt("id_asistencia"));
-        a.setIdUsuario(rs.getInt("id_usuario"));
+        List<Asistencia> lista = new ArrayList<>();
+        while (rs.next()) {
+            Asistencia a = new Asistencia();
+            a.setIdAsistencia(rs.getInt("id_asistencia"));
+            a.setIdUsuario(rs.getInt("id_usuario"));
 
-        Timestamp entrada = rs.getTimestamp("fecha_hora_entrada");
-        if (entrada != null) a.setFechaHoraEntrada(entrada.toLocalDateTime());
+            Timestamp entrada = rs.getTimestamp("fecha_hora_entrada");
+            if (entrada != null) a.setFechaHoraEntrada(entrada.toLocalDateTime());
 
-        Timestamp salida = rs.getTimestamp("fecha_hora_salida");
-        if (salida != null) a.setFechaHoraSalida(salida.toLocalDateTime());
+            Timestamp salida = rs.getTimestamp("fecha_hora_salida");
+            if (salida != null) a.setFechaHoraSalida(salida.toLocalDateTime());
 
-        a.setEstado(rs.getString("estado"));
+            a.setEstado(rs.getString("estado"));
 
-        lista.add(a);
+            lista.add(a);
+        }
+        return lista;
     }
-    return lista;
-}
     
     public Asistencia getOne(int id) throws SQLException {
         String sql = "SELECT * FROM Asistencias WHERE id_asistencia = " + id;
@@ -121,6 +122,88 @@ public List<Asistencia> getAll() throws SQLException {
             nuevaId = rs.getInt("ultimaId");
         }
         return nuevaId + 1;
+    }
+    
+    
+    public void marcarEntrada(int idUsuario) throws SQLException {
+        String sql = "INSERT INTO Asistencias (id_usuario, fecha_hora_entrada, estado) " +
+                     "VALUES (" + idUsuario + ", NOW(), 'Presente')";
+        conexion.ejecutar(sql);
+    }
+    
+
+    public void marcarSalida(int idUsuario) throws SQLException {
+        String sql = "UPDATE Asistencias " +
+                     "SET fecha_hora_salida = NOW() " +
+                     "WHERE id_usuario = " + idUsuario + " " +
+                     "AND fecha_hora_salida IS NULL";  // solo cierra el último registro abierto
+        conexion.ejecutar(sql);
+    }
+    
+    
+    public List<Asistencia> getAllAsistencia() throws SQLException {
+        String sql = "SELECT u.nombre, a.id_asistencia, a.fecha_hora_entrada, " +
+                     "a.fecha_hora_salida, a.estado " +
+                     "FROM Asistencias a " +
+                     "INNER JOIN Usuarios u ON a.id_usuario = u.id_usuario";
+
+        ResultSet rs = conexion.ejecutar(sql);
+        List<Asistencia> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Asistencia a = new Asistencia();
+
+            a.setIdAsistencia(rs.getInt("id_asistencia"));
+
+            Timestamp entrada = rs.getTimestamp("fecha_hora_entrada");
+            if (entrada != null) a.setFechaHoraEntrada(entrada.toLocalDateTime());
+
+            Timestamp salida = rs.getTimestamp("fecha_hora_salida");
+            if (salida != null) a.setFechaHoraSalida(salida.toLocalDateTime());
+
+            a.setEstado(rs.getString("estado"));
+
+            // Creamos el objeto Usuario pero solo con el nombre
+            Usuario u = new Usuario();
+            u.setNombre(rs.getString("nombre"));
+
+            a.setUsuario(u); // asociamos el usuario a la asistencia
+
+            lista.add(a);
+        }
+
+        return lista;
+    }
+    
+    public List<Asistencia> getByEstado(String estado) throws SQLException {
+        String sql = "SELECT u.nombre, a.id_asistencia, a.fecha_hora_entrada, " +
+                     "a.fecha_hora_salida, a.estado " +
+                     "FROM Asistencias a " +
+                     "INNER JOIN Usuarios u ON a.id_usuario = u.id_usuario " +
+                     "WHERE a.estado = '" + estado + "'";
+
+        ResultSet rs = conexion.ejecutar(sql);
+        List<Asistencia> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Asistencia a = new Asistencia();
+            a.setIdAsistencia(rs.getInt("id_asistencia"));
+            Timestamp entrada = rs.getTimestamp("fecha_hora_entrada");
+            if (entrada != null) a.setFechaHoraEntrada(entrada.toLocalDateTime());
+
+            Timestamp salida = rs.getTimestamp("fecha_hora_salida");
+            if (salida != null) a.setFechaHoraSalida(salida.toLocalDateTime());
+
+            a.setEstado(rs.getString("estado"));
+
+            Usuario u = new Usuario();
+            u.setNombre(rs.getString("nombre"));
+            a.setUsuario(u);
+
+            lista.add(a);
+        }
+
+        return lista;
     }
 
 }
