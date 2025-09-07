@@ -1593,7 +1593,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="text_login_clave5" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                                          <Component id="text_fecha_fin" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
                                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="btn_Login_ingresar3" min="-2" pref="110" max="-2" attributes="0"/>
@@ -1601,7 +1601,7 @@
                                                   <Component id="btn_Login_ingresar5" min="-2" pref="110" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="text_login_clave3" min="-2" pref="270" max="-2" attributes="0"/>
+                                                  <Component id="text_fecha_inicio" min="-2" pref="270" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="box_Estado_Asistencia" min="-2" pref="142" max="-2" attributes="0"/>
                                               </Group>
@@ -1624,13 +1624,13 @@
                               <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="text_login_clave3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="text_fecha_inicio" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="box_Estado_Asistencia" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="text_login_clave5" min="-2" max="-2" attributes="0"/>
+                              <Component id="text_fecha_fin" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btn_Login_ingresar3" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -1655,7 +1655,7 @@
                         <Property name="text" type="java.lang.String" value="Fecha de inicio"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="text_login_clave3">
+                    <Component class="javax.swing.JTextField" name="text_fecha_inicio">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="c4" green="d0" red="d5" type="rgb"/>
@@ -1670,7 +1670,7 @@
                         <Property name="toolTipText" type="java.lang.String" value="text_login_clave"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_login_clave3ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_fecha_inicioActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_Login_ingresar3">
@@ -1720,7 +1720,7 @@
                         <Property name="text" type="java.lang.String" value="Fecha de fin"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="text_login_clave5">
+                    <Component class="javax.swing.JTextField" name="text_fecha_fin">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="c4" green="d0" red="d5" type="rgb"/>
@@ -1734,7 +1734,7 @@
                         <Property name="toolTipText" type="java.lang.String" value="text_login_clave"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_login_clave5ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_fecha_finActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_Login_ingresar5">

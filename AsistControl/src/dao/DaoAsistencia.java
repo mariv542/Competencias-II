@@ -205,5 +205,41 @@ public class DaoAsistencia {
 
         return lista;
     }
+    
+    
+    public List<Asistencia> getByRangoFechaEstado(String fechaInicio, String fechaFin, String estado) throws SQLException {
+        String sql = "SELECT u.nombre, a.id_asistencia, a.fecha_hora_entrada, " +
+                     "a.fecha_hora_salida, a.estado " +
+                     "FROM Asistencias a " +
+                     "INNER JOIN Usuarios u ON a.id_usuario = u.id_usuario " +
+                     "WHERE a.fecha_hora_entrada BETWEEN '" + fechaInicio + "' AND '" + fechaFin + "'";
+
+        if (!"Todos".equalsIgnoreCase(estado)) {
+            sql += " AND a.estado = '" + estado + "'";
+        }
+
+        ResultSet rs = conexion.ejecutar(sql);
+        List<Asistencia> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Asistencia a = new Asistencia();
+            a.setIdAsistencia(rs.getInt("id_asistencia"));
+
+            Timestamp entrada = rs.getTimestamp("fecha_hora_entrada");
+            if (entrada != null) a.setFechaHoraEntrada(entrada.toLocalDateTime());
+
+            Timestamp salida = rs.getTimestamp("fecha_hora_salida");
+            if (salida != null) a.setFechaHoraSalida(salida.toLocalDateTime());
+
+            a.setEstado(rs.getString("estado"));
+
+            Usuario u = new Usuario();
+            u.setNombre(rs.getString("nombre"));
+            a.setUsuario(u);
+
+            lista.add(a);
+        }
+        return lista;
+    }
 
 }

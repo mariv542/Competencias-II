@@ -4,6 +4,7 @@
  */
 package app;
 
+import dao.DaoAsistencia;
 import db.DataManager;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,6 +15,7 @@ import model.Asistencia;
 import model.Usuario;
 import modelTM.TMAsistencia;
 import modelTM.TMUsuario;
+import util.ExportarReporte;
 
 /**
  *
@@ -122,11 +124,11 @@ public class App extends javax.swing.JFrame {
         jPanel28 = new javax.swing.JPanel();
         jPanel30 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
-        text_login_clave3 = new javax.swing.JTextField();
+        text_fecha_inicio = new javax.swing.JTextField();
         btn_Login_ingresar3 = new javax.swing.JButton();
         box_Estado_Asistencia = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        text_login_clave5 = new javax.swing.JTextField();
+        text_fecha_fin = new javax.swing.JTextField();
         btn_Login_ingresar5 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tm_asistenciaTabla = new javax.swing.JTable();
@@ -1049,14 +1051,14 @@ public class App extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Fecha de inicio");
 
-        text_login_clave3.setBackground(new java.awt.Color(213, 208, 196));
-        text_login_clave3.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        text_login_clave3.setForeground(new java.awt.Color(0, 0, 0));
-        text_login_clave3.setText("00/00/0000");
-        text_login_clave3.setToolTipText("text_login_clave");
-        text_login_clave3.addActionListener(new java.awt.event.ActionListener() {
+        text_fecha_inicio.setBackground(new java.awt.Color(213, 208, 196));
+        text_fecha_inicio.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        text_fecha_inicio.setForeground(new java.awt.Color(0, 0, 0));
+        text_fecha_inicio.setText("00/00/0000");
+        text_fecha_inicio.setToolTipText("text_login_clave");
+        text_fecha_inicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text_login_clave3ActionPerformed(evt);
+                text_fecha_inicioActionPerformed(evt);
             }
         });
 
@@ -1082,13 +1084,13 @@ public class App extends javax.swing.JFrame {
         jLabel25.setForeground(new java.awt.Color(0, 0, 0));
         jLabel25.setText("Fecha de fin");
 
-        text_login_clave5.setBackground(new java.awt.Color(213, 208, 196));
-        text_login_clave5.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        text_login_clave5.setForeground(new java.awt.Color(0, 0, 0));
-        text_login_clave5.setToolTipText("text_login_clave");
-        text_login_clave5.addActionListener(new java.awt.event.ActionListener() {
+        text_fecha_fin.setBackground(new java.awt.Color(213, 208, 196));
+        text_fecha_fin.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        text_fecha_fin.setForeground(new java.awt.Color(0, 0, 0));
+        text_fecha_fin.setToolTipText("text_login_clave");
+        text_fecha_fin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                text_login_clave5ActionPerformed(evt);
+                text_fecha_finActionPerformed(evt);
             }
         });
 
@@ -1127,14 +1129,14 @@ public class App extends javax.swing.JFrame {
                         .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel25)
                             .addComponent(jLabel21)
-                            .addComponent(text_login_clave5, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(text_fecha_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel30Layout.createSequentialGroup()
                                     .addComponent(btn_Login_ingresar3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btn_Login_ingresar5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel30Layout.createSequentialGroup()
-                                    .addComponent(text_login_clave3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(text_fecha_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(box_Estado_Asistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel30Layout.createSequentialGroup()
@@ -1149,12 +1151,12 @@ public class App extends javax.swing.JFrame {
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(text_login_clave3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(text_fecha_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(box_Estado_Asistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(text_login_clave5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(text_fecha_fin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Login_ingresar3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1696,9 +1698,9 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_Login_ingresar2ActionPerformed
 
-    private void text_login_clave3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_login_clave3ActionPerformed
+    private void text_fecha_inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_fecha_inicioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text_login_clave3ActionPerformed
+    }//GEN-LAST:event_text_fecha_inicioActionPerformed
 
     private void btn_listaTrabajadores_Accesos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_Accesos2ActionPerformed
         // TODO add your handling code here:
@@ -1734,12 +1736,53 @@ public class App extends javax.swing.JFrame {
            }
     }//GEN-LAST:event_box_Estado_AsistenciaActionPerformed
 
-    private void text_login_clave5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_login_clave5ActionPerformed
+    private void text_fecha_finActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_fecha_finActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_text_login_clave5ActionPerformed
+    }//GEN-LAST:event_text_fecha_finActionPerformed
 
     private void btn_Login_ingresar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Login_ingresar5ActionPerformed
         // TODO add your handling code here:
+        try {
+            // Fechas desde los JTextField
+            String fechaInicio = text_fecha_inicio.getText().trim();
+            String fechaFin = text_fecha_fin.getText().trim();
+
+            if (fechaInicio.isEmpty() || fechaFin.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar las dos fechas.");
+                return;
+            }
+
+            fechaInicio = fechaInicio + " 00:00:00";
+            fechaFin = fechaFin + " 23:59:59";
+
+            String estadoSeleccionado = box_Estado_Asistencia.getSelectedItem().toString();
+
+            List<Asistencia> lista = dataManager.getDataAsistencia().getByRangoFechaEstado(fechaInicio, fechaFin, estadoSeleccionado);
+
+            if (lista.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay asistencias en ese rango de fechas con ese estado.");
+                return;
+            }
+
+            // Ruta del archivo PDF
+            // Ruta Para Cristobal     \\Users\\cristobalO.O\\Desktop\\Competencias-II\\reportes
+            String ruta = "C:/reportes/reporte_" 
+                    + text_fecha_inicio.getText() 
+                    + "_a_" 
+                    + text_fecha_fin.getText()
+                    + "_" 
+                    + (estadoSeleccionado.equals("Todos") ? "todos" : estadoSeleccionado)
+                    + ".pdf";
+
+            ExportarReporte.exportarAsistencias(lista, ruta, estadoSeleccionado);
+
+            JOptionPane.showMessageDialog(this, "Reporte exportado en:\n" + ruta);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al exportar el reporte.");
+        }
+        
     }//GEN-LAST:event_btn_Login_ingresar5ActionPerformed
 
     private void btn_Login_ingresar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Login_ingresar3ActionPerformed
@@ -1874,9 +1917,9 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField text_fecha_fin;
+    private javax.swing.JTextField text_fecha_inicio;
     private javax.swing.JTextField text_login_clave2;
-    private javax.swing.JTextField text_login_clave3;
-    private javax.swing.JTextField text_login_clave5;
     private javax.swing.JTable tm_asistenciaTabla;
     private javax.swing.JTable tm_lista_Trabajadores;
     private javax.swing.JTextField txt_Asistencia_Rut;
