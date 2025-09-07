@@ -1509,6 +1509,7 @@ public class App extends javax.swing.JFrame {
 
     private void btn_listaTrabajadores_AccesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_AccesosActionPerformed
         // TODO add your handling code here:
+        RegistroAcceso.setVisible(true);
     }//GEN-LAST:event_btn_listaTrabajadores_AccesosActionPerformed
 
     private void btn_listaTrabajadores_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_salirActionPerformed
@@ -1527,6 +1528,7 @@ public class App extends javax.swing.JFrame {
 
     private void btn_listaTrabajadores_reportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_reportes1ActionPerformed
         // TODO add your handling code here:
+        Reportes.setVisible(true);
     }//GEN-LAST:event_btn_listaTrabajadores_reportes1ActionPerformed
 
     private void btn_lista_Trabajadores_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lista_Trabajadores_salirActionPerformed
@@ -1659,14 +1661,17 @@ public class App extends javax.swing.JFrame {
 
     private void btn_listaTrabajadores_salir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_salir1ActionPerformed
         // TODO add your handling code here:
+        ListaTrabajadores.setVisible(true);
     }//GEN-LAST:event_btn_listaTrabajadores_salir1ActionPerformed
 
     private void btn_lista_Trabajadores_usuarios6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lista_Trabajadores_usuarios6ActionPerformed
         // TODO add your handling code here:
+        ListaTrabajadores.setVisible(true);
     }//GEN-LAST:event_btn_lista_Trabajadores_usuarios6ActionPerformed
 
     private void btn_listaTrabajadores_reportes6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_reportes6ActionPerformed
         // TODO add your handling code here:
+        Reportes.setVisible(true);
     }//GEN-LAST:event_btn_listaTrabajadores_reportes6ActionPerformed
 
     private void text_login_clave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_login_clave2ActionPerformed
@@ -1704,14 +1709,17 @@ public class App extends javax.swing.JFrame {
 
     private void btn_listaTrabajadores_Accesos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_Accesos2ActionPerformed
         // TODO add your handling code here:
+        RegistroAcceso.setVisible(true);
     }//GEN-LAST:event_btn_listaTrabajadores_Accesos2ActionPerformed
 
     private void btn_listaTrabajadores_salir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_salir2ActionPerformed
         // TODO add your handling code here:
+        ListaTrabajadores.setVisible(true);
     }//GEN-LAST:event_btn_listaTrabajadores_salir2ActionPerformed
 
     private void btn_lista_Trabajadores_usuarios7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lista_Trabajadores_usuarios7ActionPerformed
         // TODO add your handling code here:
+        ListaTrabajadores.setVisible(true);
     }//GEN-LAST:event_btn_lista_Trabajadores_usuarios7ActionPerformed
 
     private void btn_listaTrabajadores_reportes7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listaTrabajadores_reportes7ActionPerformed
